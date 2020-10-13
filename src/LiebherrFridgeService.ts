@@ -1,3 +1,5 @@
+import LiebherrFridge from './LiebherrFridge'
+
 export default class LiebherrFridgeService {
 
 	async loginUser(email: string, password: string) {
@@ -5,7 +7,8 @@ export default class LiebherrFridgeService {
 	}
 
 	async getDevices() {
-
+		let devices: LiebherrFridge[] = []
+		return devices
 	}
 	
 	async updateDeviceValue() {
