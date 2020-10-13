@@ -34,6 +34,7 @@ export default class LiebherrFridgePlatform implements DynamicPlatformPlugin {
 
   public readonly accessories: PlatformAccessory[] = []
   public liebherrFridges: LiebherrFridge[] = []
+  public liebherrFridgeAccessories: LiebherrFridgeAccessory[] = []
 
   constructor(
     public readonly log: Logging,
@@ -57,7 +58,7 @@ export default class LiebherrFridgePlatform implements DynamicPlatformPlugin {
 
 
   async didFinishLaunching() {
-    this.log.info("APCHome initialized")
+    this.log.info("LiebherrFridgePlatform initialized")
     this.liebherrFridgeService = new LiebherrFridgeService()
     if (this.config.email && this.config.password) {
       let email = this.config.email.toString()
@@ -74,8 +75,8 @@ export default class LiebherrFridgePlatform implements DynamicPlatformPlugin {
         this.log.info("existingAccessory value", existingAccessory)
         if (existingAccessory) {
           this.log.info('Restoring accessory')
-          let liebherrFridge = new LiebherrFridgeAccessory(this, existingAccessory, this.config, this.log, this.liebherrFridges[i], this.liebherrFridgeService)
-          this.liebherrFridges.push(liebherrFridge)
+          let liebherrFridgeAccessory = new LiebherrFridgeAccessory(this, existingAccessory, this.config, this.log, this.liebherrFridges[i], this.liebherrFridgeService)
+          this.liebherrFridgeAccessories.push(liebherrFridgeAccessory)
 
           this.api.updatePlatformAccessories([existingAccessory])
 
@@ -86,7 +87,7 @@ export default class LiebherrFridgePlatform implements DynamicPlatformPlugin {
           let liebherrAccessory = new LiebherrFridgeAccessory(this, accessory, this.config, this.log, this.liebherrFridges[i], this.liebherrFridgeService)
           this.log.info('Created new accessory with name', this.liebherrFridges[i].name)
           this.api.registerPlatformAccessories(PLUGIN_NAME,PLATFORM_NAME,[accessory])
-          this.liebherrFridges.push(liebherrAccessory)
+          this.liebherrFridgeAccessories.push(liebherrAccessory)
         }
 
       }

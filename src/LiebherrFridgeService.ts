@@ -1,14 +1,14 @@
 export default class LiebherrFridgeService {
 
-	loginUser(email: string, password: string) {
+	async loginUser(email: string, password: string) {
 
 	}
 
-	getDevices() {
+	async getDevices() {
 
 	}
 	
-	updateDeviceValue() {
+	async updateDeviceValue() {
 
 	}
 
